@@ -8,10 +8,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
-            <div>
-                <ul>
-                    <li><a href="/information">Information</a></li>
-                </ul>
+            <div th:include="th-fragments :: nav">
             </div>
             <div>
                 <div th:object="${pet}">

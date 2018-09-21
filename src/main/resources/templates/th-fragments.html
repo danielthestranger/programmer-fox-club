@@ -11,6 +11,17 @@
     <script th:src="@{/js/bootstrap.min.js}"></script>
 </head>
 <body>
-
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <div th:fragment="nav">
+                <ul th:with="nameParamValue=${#request.getParameter('name')}">
+                    <li><a th:href="@{/information(name=${nameParamValue})}">Information</a></li>
+                    <li><a th:href="@{/nutritionStore(name=${nameParamValue})}">Nutrition store</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
