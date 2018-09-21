@@ -1,6 +1,8 @@
 package com.greenfoxacademy.programmerfoxclub.controllers;
 
+import com.greenfoxacademy.programmerfoxclub.services.PetService;
 import com.greenfoxacademy.programmerfoxclub.utils.UriUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +14,13 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class MainController {
+
+    private PetService petService;
+
+    @Autowired
+    public MainController(PetService petService) {
+        this.petService = petService;
+    }
 
     @GetMapping("/")
     public String showIndex(HttpServletRequest request,
@@ -26,8 +35,7 @@ public class MainController {
     }
 
     private boolean petExists(String name) {
-        // TODO implement
-        return true;
+        return petService.exists(name);
     }
 
     @GetMapping("/login")
