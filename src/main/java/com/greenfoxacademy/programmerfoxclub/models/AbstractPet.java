@@ -52,12 +52,19 @@ public abstract class AbstractPet implements Pet {
     }
 
 
+    // TODO behaviours below to be extracted to keep the object purely a data structure
+
+
+    @Override
+    public int countTricks() {
+        return tricks.size();
+    }
+
     @Override
     public void setTricks(String[] trickDescriptions) {
         this.tricks = trickListFromDescriptions(trickDescriptions);
     }
 
-    // TODO behaviours below to be extracted to keep the object purely a data structure
 
     private List<Trick> trickListFromDescriptions(String[] trickDescriptions) {
         List<Trick> tricks = new ArrayList<>();
@@ -69,6 +76,6 @@ public abstract class AbstractPet implements Pet {
 
     @Override
     public String getSummary() {
-        return "This is " + name + " currently living on ? and ?. He knows " + tricks.size() + " tricks.";
+        return "This is " + name + " currently living on ? and ?. He knows " + countTricks() + " tricks.";
     }
 }

@@ -8,6 +8,7 @@ public interface Pet {
     public List<Trick> getTricks();
     public void setTricks(List<Trick> tricks);
 
+    public int countTricks();
     public void setTricks(String[] trickDescriptions);
     public String getSummary();
 }

@@ -18,9 +18,11 @@
                     <img src="greenfox.png" />
                     <p th:text="${pet.getSummary()}"></p>
                     <h1>Known tricks</h1>
-                    <ul>
-                        <li>write HTML</li>
-                        <li>code in Java</li>
+                    <div th:if="${pet.countTricks() == 0}">
+                        <p>You don't know any tricks yet.<br/>Go learn some.</p>
+                    </div>
+                    <ul th:if="${pet.countTricks() > 0}">
+                        <li th:each="trick : ${pet.getTricks()}" th:text="${trick.getDescription()}" ></li>
                     </ul>
                 </div>
             </div>
