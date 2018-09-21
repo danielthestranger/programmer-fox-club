@@ -2,7 +2,6 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:include="th-fragments :: head" />
-    <title>Programmer Fox Club</title>
 </head>
 <body>
 <div class="container">
@@ -19,7 +18,7 @@
                         <p>You don't know any tricks yet.<br/>Go learn some.</p>
                     </div>
                     <ul th:if="${pet.countTricks() > 0}">
-                        <li th:each="trick : ${pet.getTricks()}" th:text="${trick.getDescription()}" ></li>
+                        <li th:each="trick : ${pet.getTricks()}" th:text="${trick.getDescription()}"></li>
                     </ul>
                 </div>
             </div>

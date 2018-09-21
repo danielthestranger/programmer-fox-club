@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="th-fragments :: head" />
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <div th:include="th-fragments :: nav">
+            </div>
+            <div>
+                <div th:object="${pet}">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

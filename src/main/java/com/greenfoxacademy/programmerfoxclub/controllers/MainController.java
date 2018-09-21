@@ -33,18 +33,6 @@ public class MainController {
         }
     }
 
-    @GetMapping("/information")
-    public String showInfoPage(HttpServletRequest request,
-                            @RequestParam(value = "name", defaultValue = "") String name,
-                            Model model) {
-        String uriQuery = UriUtil.getFullUriQueryFromRequest(request);
-        if (name.isEmpty() || !petExists(name)) {
-            return "redirect:/login" + uriQuery;
-        }
-        model.addAttribute("pet", petService.getByName(name));
-        return "information";
-    }
-
     @GetMapping("/login")
     public String showLogin(@RequestParam(value = "name", defaultValue = "") String name,
                             Model model) {
@@ -63,6 +51,37 @@ public class MainController {
             petService.getByName(name);
             return "redirect:/information" + uriQuery;
         }
+    }
+
+    @GetMapping("/information")
+    public String showInformationPage(HttpServletRequest request,
+                            @RequestParam(value = "name", defaultValue = "") String name,
+                            Model model) {
+        String uriQuery = UriUtil.getFullUriQueryFromRequest(request);
+        if (!validateNameParam(name)) {
+            return "redirect:/login" + uriQuery;
+        }
+        model.addAttribute("pet", petService.getByName(name));
+        return "information";
+    }
+
+    @GetMapping("/nutritionStore")
+    public String showNutritionStore(HttpServletRequest request,
+                            @RequestParam(value = "name", defaultValue = "") String name,
+                            Model model) {
+        String uriQuery = UriUtil.getFullUriQueryFromRequest(request);
+        if (!validateNameParam(name)) {
+            return "redirect:/login" + uriQuery;
+        }
+        model.addAttribute("pet", petService.getByName(name));
+        return "nutrition-store";
+    }
+
+    private boolean validateNameParam(String name) {
+        if (name.isEmpty() || !petExists(name))
+            return false;
+        else
+            return true;
     }
 
     private boolean petExists(String name) {
