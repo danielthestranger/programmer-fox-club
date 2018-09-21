@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,7 +18,7 @@ public class MainController {
                             @RequestParam(value = "name", defaultValue = "") String name,
                             Model model) {
         if (name.isEmpty() || !petExists(name)) {
-            return "redirect:/login" + UriUtil.getFullQueryFromRequest(request);
+            return "redirect:/login" + UriUtil.getFullUriQueryFromRequest(request);
         }
 
         model.addAttribute("name", name);
@@ -37,10 +38,9 @@ public class MainController {
 
     @PostMapping("/login")
     public String login(HttpServletRequest request,
-                        @RequestParam("name") String name) {
+                              @RequestParam("name") String name) {
         //input @RequestParam is not used, it's only there to enforce its presence
-        String uriQuery = UriUtil.getFullQueryFromRequest(request);
+        String uriQuery = UriUtil.getFullUriQueryFromRequest(request);
         return "redirect:/" + uriQuery;
     }
-
 }

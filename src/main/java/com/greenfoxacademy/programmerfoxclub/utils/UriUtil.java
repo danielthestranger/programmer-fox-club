@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 public class UriUtil {
-    public static String getFullQueryFromRequest(HttpServletRequest request) {
+    public static String getFullUriQueryFromRequest(HttpServletRequest request) {
         String requestMethod = request.getMethod();
         switch (requestMethod) {
             case "GET":
