@@ -26,8 +26,21 @@ public class MainController {
     public String showIndex(HttpServletRequest request,
                             @RequestParam(value = "name", defaultValue = "") String name,
                             Model model) {
+        String uriQuery = UriUtil.getFullUriQueryFromRequest(request);
+        if (petService.exists(name)) {
+            return "redirect:/information" + uriQuery;
+        } else {
+            return "redirect:/login" + uriQuery;
+        }
+    }
+
+    @GetMapping("/information")
+    public String showInfoPage(HttpServletRequest request,
+                            @RequestParam(value = "name", defaultValue = "") String name,
+                            Model model) {
+        String uriQuery = UriUtil.getFullUriQueryFromRequest(request);
         if (name.isEmpty() || !petExists(name)) {
-            return "redirect:/login" + UriUtil.getFullUriQueryFromRequest(request);
+            return "redirect:/login" + uriQuery;
         }
         model.addAttribute("pet", petService.getByName(name));
         return "index";
@@ -42,10 +55,15 @@ public class MainController {
 
     @PostMapping("/login")
     public String login(HttpServletRequest request,
-                      @RequestParam("name") String name) {
+                      @RequestParam(value = "name", defaultValue = "") String name,
+                        Model model) {
         String uriQuery = UriUtil.getFullUriQueryFromRequest(request);
-
-        return "redirect:/" + uriQuery;
+        if (name.isEmpty()) {
+            return "redirect:/login" + uriQuery;
+        } else {
+            petService.getByName(name);
+            return "redirect:/information" + uriQuery;
+        }
     }
 
     private boolean petExists(String name) {
