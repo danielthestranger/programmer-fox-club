@@ -5,19 +5,25 @@
     <title>Programmer Fox Club</title>
 </head>
 <body>
-    <div>
-        <ul>
-            <li><a href="/information">Information</a></li>
-        </ul>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <div>
+                <ul>
+                    <li><a href="/information">Information</a></li>
+                </ul>
+            </div>
+            <div>
+                <img src="greenfox.png" />
+                <p th:text="|This is ${name} currently living on pizza and lemonade. He knows 2 tricks.|"></p>
+                <h1>Known tricks</h1>
+                <ul>
+                    <li>write HTML</li>
+                    <li>code in Java</li>
+                </ul>
+            </div>
+        </div>
     </div>
-    <div>
-        <img src="greenfox.png" />
-        <p th:text="|This is ${name} currently living on pizza and lemonade. He knows 2 tricks.|"></p>
-        <h1>Known tricks</h1>
-        <ul>
-            <li>write HTML</li>
-            <li>code in Java</li>
-        </ul>
-    </div>
+</div>
 </body>
 </html>

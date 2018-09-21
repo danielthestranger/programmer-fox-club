@@ -39,7 +39,7 @@ public class MainController {
     }
 
     @GetMapping("/login")
-    public String showLogin(@RequestParam(value = "name", required = false) String name,
+    public String showLogin(@RequestParam(value = "name", defaultValue = "") String name,
                             Model model) {
         model.addAttribute("name", name);
         return "login";
