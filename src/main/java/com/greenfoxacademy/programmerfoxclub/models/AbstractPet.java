@@ -7,9 +7,13 @@ public abstract class AbstractPet implements Pet {
     protected String name;
     protected List<Trick> tricks;
     protected String petType;
+    protected Food food;
+    protected Drink drink;
 
     public AbstractPet() {
         this.petType = this.getClass().getSimpleName();
+        this.food = Food.NONE;
+        this.drink = Drink.NONE;
         this.tricks = new ArrayList<>();
     }
 
@@ -51,6 +55,25 @@ public abstract class AbstractPet implements Pet {
         this.tricks = tricks;
     }
 
+    @Override
+    public Food getFood() {
+        return food;
+    }
+
+    @Override
+    public void setFood(Food food) {
+        this.food = food;
+    }
+
+    @Override
+    public Drink getDrink() {
+        return drink;
+    }
+
+    @Override
+    public void setDrink(Drink drink) {
+        this.drink = drink;
+    }
 
     // TODO behaviours below to be extracted to keep the object purely a data structure
 
@@ -65,7 +88,6 @@ public abstract class AbstractPet implements Pet {
         this.tricks = trickListFromDescriptions(trickDescriptions);
     }
 
-
     private List<Trick> trickListFromDescriptions(String[] trickDescriptions) {
         List<Trick> tricks = new ArrayList<>();
         for (String trickDescription : trickDescriptions) {
@@ -76,6 +98,6 @@ public abstract class AbstractPet implements Pet {
 
     @Override
     public String getSummary() {
-        return "This is " + name + " currently living on ? and ?. He knows " + countTricks() + " tricks.";
+        return "This is " + name + ", currently living on " + food + " and " + drink + ". He knows " + countTricks() + " tricks.";
     }
 }

@@ -1,7 +1,6 @@
 package com.greenfoxacademy.programmerfoxclub.repositories;
 
 import com.greenfoxacademy.programmerfoxclub.factories.PetFactory;
-import com.greenfoxacademy.programmerfoxclub.models.Fox;
 import com.greenfoxacademy.programmerfoxclub.models.Pet;
 import org.springframework.stereotype.Repository;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
@@ -34,13 +33,13 @@ public class PetMemoryRepository implements PetRepository {
     }
 
     @Override
-    public Pet addByName(String name) {
+    public Pet addNewByName(String name) {
         return pets.put(name, PetFactory.createDefault(name));
     }
 
     @Override
     public Pet updateByName(String name, Pet updatedPet) {
-        throw new NotImplementedException();
+        return pets.put(name, updatedPet);
     }
 
     @Override

@@ -10,8 +10,23 @@
             <div th:include="th-fragments :: nav">
             </div>
             <div>
-                <div th:object="${pet}">
+                <div>
+                    <p th:text="${pet.getSummary()}"></p>
 
+                    <form th:object="${pet}" action="#" th:action="@{'/nutritionStore'}" method="post">
+
+                        <select class="form-control form-control-sm" th:field="*{food}">
+                            <option th:each="option : ${T(com.greenfoxacademy.programmerfoxclub.models.Food).values()}"
+                                    th:value="${{option}}" th:text="${option}"></option>
+                        </select>
+
+                        <select class="form-control form-control-sm" th:field="*{drink}">
+                            <option th:each="option : ${T(com.greenfoxacademy.programmerfoxclub.models.Drink).values()}"
+                                    th:value="${{option}}" th:text="${option}"></option>
+                        </select>
+
+                        <input type="submit" th:value="Change" class="btn btn-sm btn-primary"/>
+                    </form>
                 </div>
             </div>
         </div>

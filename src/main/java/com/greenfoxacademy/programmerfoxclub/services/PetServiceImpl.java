@@ -20,11 +20,16 @@ public class PetServiceImpl implements PetService {
         if (petRepository.exists(name))
             return petRepository.findByName(name);
         else
-            return petRepository.addByName(name);
+            return petRepository.addNewByName(name);
     }
 
     @Override
     public boolean exists(String name) {
         return petRepository.exists(name);
+    }
+
+    @Override
+    public Pet updateByName(String name, Pet updatedPet) {
+        return petRepository.updateByName(name, updatedPet);
     }
 }

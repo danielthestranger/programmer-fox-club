@@ -1,11 +1,14 @@
 package com.greenfoxacademy.programmerfoxclub.controllers;
 
+import com.greenfoxacademy.programmerfoxclub.models.Fox;
+import com.greenfoxacademy.programmerfoxclub.models.Pet;
 import com.greenfoxacademy.programmerfoxclub.services.PetService;
 import com.greenfoxacademy.programmerfoxclub.utils.UriUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -75,6 +78,18 @@ public class MainController {
         }
         model.addAttribute("pet", petService.getByName(name));
         return "nutrition-store";
+    }
+
+    @PostMapping("/nutritionStore")
+    public String changePetNutrition(HttpServletRequest request,
+                            @RequestParam(value = "name", defaultValue = "") String name,
+                            @ModelAttribute(value = "pet") Fox pet) { //TODO use concrete implementation, or tell Jackson to instantiate a Fox
+        String uriQuery = UriUtil.getFullUriQueryFromRequest(request);
+        if (!validateNameParam(name)) {
+            return "redirect:/login" + uriQuery;
+        }
+        petService.updateByName(name, pet);
+        return "redirect:/information" + uriQuery;
     }
 
     private boolean validateNameParam(String name) {
