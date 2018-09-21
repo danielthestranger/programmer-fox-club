@@ -7,5 +7,7 @@ public interface Pet {
     public void setName(String name);
     public List<Trick> getTricks();
     public void setTricks(List<Trick> tricks);
+
+    public void setTricks(String[] trickDescriptions);
     public String getSummary();
 }

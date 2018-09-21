@@ -1,5 +1,6 @@
 package com.greenfoxacademy.programmerfoxclub.repositories;
 
+import com.greenfoxacademy.programmerfoxclub.factories.PetFactory;
 import com.greenfoxacademy.programmerfoxclub.models.Fox;
 import com.greenfoxacademy.programmerfoxclub.models.Pet;
 import org.springframework.stereotype.Repository;
@@ -34,7 +35,7 @@ public class PetMemoryRepository implements PetRepository {
 
     @Override
     public Pet addByName(String name) {
-        return pets.put(name, new Fox(name));
+        return pets.put(name, PetFactory.createDefault(name));
     }
 
     @Override
@@ -52,7 +53,7 @@ public class PetMemoryRepository implements PetRepository {
         String[] names = {"Karak", "Vuk"};
         String[] trickDescriptions = {"hányni", "szarni"};
         for (String name : names) {
-            dummyData.put(name, new Fox(name, trickDescriptions));
+            dummyData.put(name, PetFactory.createDefault(name, trickDescriptions));
         }
 
         return dummyData;

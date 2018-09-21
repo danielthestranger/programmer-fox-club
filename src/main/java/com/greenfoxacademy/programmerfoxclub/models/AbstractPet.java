@@ -9,13 +9,13 @@ public abstract class AbstractPet implements Pet {
     protected String petType;
 
     public AbstractPet() {
-        petType = this.getClass().getSimpleName();
+        this.petType = this.getClass().getSimpleName();
+        this.tricks = new ArrayList<>();
     }
 
     public AbstractPet(String name) {
         this();
         this.name = name;
-        this.tricks = new ArrayList<>();
     }
 
     public AbstractPet(String name, List<Trick> tricks) {
@@ -27,10 +27,7 @@ public abstract class AbstractPet implements Pet {
     public AbstractPet(String name, String[] trickDescriptions) {
         this();
         this.name = name;
-        List<Trick> tricks = new ArrayList<>();
-        for (String trickDescription : trickDescriptions) {
-            tricks.add(new Trick(trickDescription));
-        }
+        List<Trick> tricks = trickListFromDescriptions(trickDescriptions);
         this.tricks = tricks;
     }
 
@@ -48,6 +45,21 @@ public abstract class AbstractPet implements Pet {
 
     public void setTricks(List<Trick> tricks) {
         this.tricks = tricks;
+    }
+
+
+    public void setTricks(String[] trickDescriptions) {
+        this.tricks = trickListFromDescriptions(trickDescriptions);
+    }
+
+    // TODO behaviours to be extracted to keep the object purely a data structure
+
+    private List<Trick> trickListFromDescriptions(String[] trickDescriptions) {
+        List<Trick> tricks = new ArrayList<>();
+        for (String trickDescription : trickDescriptions) {
+            tricks.add(new Trick(trickDescription));
+        }
+        return tricks;
     }
 
     public String getSummary() {
