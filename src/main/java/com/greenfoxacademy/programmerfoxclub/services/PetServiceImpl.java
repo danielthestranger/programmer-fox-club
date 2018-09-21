@@ -17,7 +17,10 @@ public class PetServiceImpl implements PetService {
 
     @Override
     public Pet getByName(String name) {
-        return petRepository.findByName(name);
+        if (petRepository.exists(name))
+            return petRepository.findByName(name);
+        else
+            return petRepository.addByName(name);
     }
 
     @Override

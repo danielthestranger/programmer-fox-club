@@ -29,13 +29,8 @@ public class MainController {
         if (name.isEmpty() || !petExists(name)) {
             return "redirect:/login" + UriUtil.getFullUriQueryFromRequest(request);
         }
-
-        model.addAttribute("name", name);
+        model.addAttribute("pet", petService.getByName(name));
         return "index";
-    }
-
-    private boolean petExists(String name) {
-        return petService.exists(name);
     }
 
     @GetMapping("/login")
@@ -47,9 +42,13 @@ public class MainController {
 
     @PostMapping("/login")
     public String login(HttpServletRequest request,
-                              @RequestParam("name") String name) {
-        //input @RequestParam is not used, it's only there to enforce its presence
+                      @RequestParam("name") String name) {
         String uriQuery = UriUtil.getFullUriQueryFromRequest(request);
+
         return "redirect:/" + uriQuery;
+    }
+
+    private boolean petExists(String name) {
+        return petService.exists(name);
     }
 }

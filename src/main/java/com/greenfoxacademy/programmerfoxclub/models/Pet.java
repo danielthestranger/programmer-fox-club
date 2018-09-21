@@ -12,6 +12,12 @@ public abstract class Pet {
         petType = this.getClass().getSimpleName();
     }
 
+    public Pet(String name) {
+        this();
+        this.name = name;
+        this.tricks = new ArrayList<>();
+    }
+
     public Pet(String name, List<Trick> tricks) {
         this();
         this.name = name;
@@ -42,5 +48,9 @@ public abstract class Pet {
 
     public void setTricks(List<Trick> tricks) {
         this.tricks = tricks;
+    }
+
+    public String getSummary() {
+        return "This is " + name + " currently living on ? and ?. He knows " + tricks.size() + " tricks.";
     }
 }

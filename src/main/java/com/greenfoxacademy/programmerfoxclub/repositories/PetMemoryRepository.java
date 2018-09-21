@@ -33,6 +33,11 @@ public class PetMemoryRepository implements PetRepository {
     }
 
     @Override
+    public Pet addByName(String name) {
+        return pets.put(name, new Fox(name));
+    }
+
+    @Override
     public Pet updateByName(String name, Pet updatedPet) {
         throw new NotImplementedException();
     }
