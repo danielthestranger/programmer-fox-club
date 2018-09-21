@@ -3,7 +3,7 @@ package com.greenfoxacademy.programmerfoxclub.models;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Fox extends Pet {
+public class Fox extends AbstractPet {
     public Fox() {
         super();
     }
