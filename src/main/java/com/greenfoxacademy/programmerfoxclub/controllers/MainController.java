@@ -39,8 +39,9 @@ public class MainController {
     }
 
     @GetMapping("/login")
-    public String showLogin(@RequestParam(value = "name", required = false) String name ) {
-        //TODO implement error message in template if name has a value
+    public String showLogin(@RequestParam(value = "name", required = false) String name,
+                            Model model) {
+        model.addAttribute("name", name);
         return "login";
     }
 
