@@ -17,7 +17,7 @@ public class MainController {
                             @RequestParam(value = "name", defaultValue = "") String name,
                             Model model) {
         if (name.isEmpty() || !petExists(name)) {
-            return "redirect:/login" + UriUtil.queryFromRequestUri(request);
+            return "redirect:/login" + UriUtil.getFullQueryFromRequest(request);
         }
 
         model.addAttribute("name", name);
@@ -39,7 +39,7 @@ public class MainController {
     public String login(HttpServletRequest request,
                         @RequestParam("name") String name) {
         //input @RequestParam is not used, it's only there to enforce its presence
-        String uriQuery = UriUtil.queryFromRequestParamMap(request.getParameterMap());
+        String uriQuery = UriUtil.getFullQueryFromRequest(request);
         return "redirect:/" + uriQuery;
     }
 
